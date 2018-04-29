@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+   <link href="/static/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+    <h1 class="display-3">Регистрируй</h1>
+    <form method="POST" action="/">
+         <textarea placeholder="Ваши строки" name="hashes" cols="80" rows="10"></textarea>
+         <button type="submit">Отправить</button>
+         {% if res %}
+            <h1 class="display-3">Обработаны ключи:</h1>
+            <ul>
+                {% for h, error in res %}
+                    <li>{{ h }} &mdash; {% if not error %}ok{% else %}error{% endif %}</li>
+                {% endfor %}
+            </ul>
+         {% endif %}
+    </form>
+</body>
+</html>
