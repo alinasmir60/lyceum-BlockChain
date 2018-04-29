@@ -13,6 +13,25 @@
     </nav>
    <h1 class="display-3">TOP-10</h1>
       {% if res %}
+         <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">ADCoin</th>
+                 </tr>
+            </thead>
+            <tbody>
+               {% for num, name, coin in res%}
+                  <tr>
+                  <th scope="row">{{number}}</th>
+                  <td>{{name}}</td>
+                  <td>{{val}}</td>
+                  </tr>
+               {% endfor %}
+
+            </tbody>
+</table>
          {{ res }}
       {% endif %}
 </body>

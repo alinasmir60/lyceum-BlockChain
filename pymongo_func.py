@@ -1,4 +1,5 @@
 import pymongo
+import requests
 from datetime import datetime
 
 
@@ -30,7 +31,7 @@ def get_balance(id):
 
 
 def transfer(from_id, to_id, coin_id):
-    balance = get_balance(from_id)
+    balance = int(get_balance(from_id))
     if not from_id or not to_id or not coin_id:
         return "К сожалению, Вы не можете осуществить перевод. Заполните все поля"
 
@@ -67,3 +68,24 @@ def transfer(from_id, to_id, coin_id):
 
         client.ad.coins.update({"id": i}, {"&set": {"user": to_id}})
     return "Вы перевели {} ADCoin {}".format(coin_id, to_id)
+
+
+def get_name_vk():
+    vk_address = "https://api.vk.com/method/users.get"
+    params = {"user_ids": str(id),
+              "v": "5.74"}
+    try:
+        answer = requests.get(vk_address, params=params).json()["response"][0]
+        return " ".join((answer["first_name"], answer["last_name"]))
+    except:
+        return "Пользователь не найден"
+
+
+def get_top():
+    sort = {'$sort': {'total': -1}}
+    agr = client.ad.coins.aggregate([{'$group': {'_id': '$user', 'total': {'$sum': 1}}}, sort])
+    name = list(agr)[:10]
+    top = []
+    for i in range(len(name)):
+        top.append((i+1, get_name_vk(name[i]["_id"]), name[i]["total"]))
+    return top

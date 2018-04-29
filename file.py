@@ -33,9 +33,9 @@ def index():
 @app.route("/wallet")
 def wallet():
     result = None
-    balance = request.args.get("wallet").strip()
+    balance = request.args.get("wallet")
     if balance:
-        if balance.isdigit():
+        if balance.strip().isdigit():
             result = pymongo_func.get_balance(balance)
         else:
             result = "Вы ввели неверный id"
@@ -51,6 +51,12 @@ def send():
         coin_id = request.form["money"].strip().split()
         result = pymongo_func.transfer(from_id, to_id, coin_id)
     return render_template("send.html", res=result)
+
+
+@app.route("/top")
+def top():
+    result = pymongo_func.get_top()
+    return render_template("top.html", res=result)
 
 if __name__ == "__main__":
     app.run(host="localhost", port=8080)
