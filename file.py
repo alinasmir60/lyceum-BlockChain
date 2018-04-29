@@ -30,16 +30,27 @@ def index():
     return render_template("index.html", res=result)
 
 
-@app.route("/wallet", methods=["GET", "POST"])
+@app.route("/wallet")
 def wallet():
     result = None
-    balance = request.form["wallet"].strip().split()
-    if balance.isdigit():
-        result = pymongo_func.get_balance(balance)
-    else:
-        result = "Вы ввели неверный id"
+    balance = request.args.get("wallet").strip()
+    if balance:
+        if balance.isdigit():
+            result = pymongo_func.get_balance(balance)
+        else:
+            result = "Вы ввели неверный id"
     return render_template("wallet.html", res=result)
 
+
+@app.route("/send", methods=["GET", "POST"])
+def send():
+    result = None
+    if request.method == "POST":
+        from_id = request.form["from_id"].strip().split()
+        to_id = request.form["to_id"].strip().split()
+        coin_id = request.form["money"].strip().split()
+        result = pymongo_func.transfer(from_id, to_id, coin_id)
+    return render_template("send.html", res=result)
 
 if __name__ == "__main__":
     app.run(host="localhost", port=8080)

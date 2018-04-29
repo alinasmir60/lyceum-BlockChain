@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="/static/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <nav class="nav">
+        <a class="nav-link active" href="/">Главная</a>
+        <a class="nav-link" href="/wallet">Кошелёк</a>
+        <a class="nav-link" href="/top">ТОР-10</a>
+        <a class="nav-link disabled" href="#">Перевод</a>
+    </nav>
+   <h1 class="display-3">Перевод</h1>
+    <form method="GET" action="/send">
+        <input class="form-control" type="text" placeholder="id отправителя" name="from_id">
+        <input class="form-control" type="text" placeholder="Сумма перевода" name="coin_id">
+        <input class="form-control" type="text" placeholder="id получателя" name="to_id">
+        <button type="submit" class="btn btn-dark">Перевести</button>
+         {% if res %}
+            <h3 class="display-3">Результат перевода:</h3>
+            {{ res }}
+         {% endif %}
+    </form>
+</body>
+</html>

@@ -5,6 +5,12 @@
     <link href="/static/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
+    <nav class="nav">
+        <a class="nav-link active" href="/">Главная</a>
+        <a class="nav-link" href="#">Кошелёк</a>
+        <a class="nav-link" href="/top">ТОР-10</a>
+        <a class="nav-link disabled" href="/send">Перевод</a>
+    </nav>
    <h1 class="display-3">Кошелёк</h1>
     <form method="GET" action="/wallet">
          <input class="form-control" type="text" placeholder="Введите ваш id" name="wallet">
