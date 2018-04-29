@@ -20,3 +20,10 @@ def check(str):
     if coin is None:
         return True
     return False
+
+
+def get_balance(id):
+    bal = client.ad.coins.find({"id": {"$eq": id}}).count()
+    if not bal:
+        bal = 0
+    return "{} ADCoins".format(str(bal))

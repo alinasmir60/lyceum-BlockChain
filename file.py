@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask import render_template
 from hashlib import md5
-from blockchain import pymongo_func
+import pymongo_func
 
 app = Flask(__name__)
 
@@ -28,6 +28,17 @@ def index():
         hashes = request.form["hashes"].strip().split()
         result = check_hashes(hashes)
     return render_template("index.html", res=result)
+
+
+@app.route("/wallet", methods=["GET", "POST"])
+def wallet():
+    result = None
+    balance = request.form["wallet"].strip().split()
+    if balance.isdigit():
+        result = pymongo_func.get_balance(balance)
+    else:
+        result = "Вы ввели неверный id"
+    return render_template("wallet.html", res=result)
 
 
 if __name__ == "__main__":

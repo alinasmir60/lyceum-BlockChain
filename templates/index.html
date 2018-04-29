@@ -2,14 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-   <link href="/static/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/bootstrap.min.css" rel="stylesheet"/>
 
 </head>
 <body>
     <h1 class="display-3">Регистрируй</h1>
     <form method="POST" action="/">
          <textarea placeholder="Ваши строки" name="hashes" cols="80" rows="10"></textarea>
-         <button type="submit">Отправить</button>
+         <button type="button" class="btn btn-dark">Отправить</button>
          {% if res %}
             <h1 class="display-3">Обработаны ключи:</h1>
             <ul>

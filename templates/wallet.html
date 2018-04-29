@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="/static/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+   <h1 class="display-3">Кошелёк</h1>
+    <form method="GET" action="/wallet">
+         <input class="form-control" type="text" placeholder="Введите ваш id" name="wallet">
+         <button type="button" class="btn btn-dark">Проверить</button>
+         {% if res %}
+            <h3 class="display-3">Ваш баланс:</h3>
+            {{ res }}
+         {% endif %}
+    </form>
+
+</body>
+</html>
