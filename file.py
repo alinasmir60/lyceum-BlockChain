@@ -9,14 +9,14 @@ app = Flask(__name__)
 def check_hashes(hashes):
     res = []
     for h in hashes:
-        error = False
+        error = True
         if md5(h.encode('utf8')).hexdigest()[:3] == '666':
             uid, rest = h.split('-', maxsplit=1)
             if not uid.isdigit() or not pymongo_func.check(rest):
-                error = True
+                error = False
             pymongo_func.add_coin(uid, rest)
         else:
-            error = True
+            error = False
         res.append((h, error))
     return res
 
