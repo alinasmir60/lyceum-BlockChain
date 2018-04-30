@@ -24,9 +24,7 @@ def check(str):
 
 
 def get_balance(id):
-    bal = client.ad.coins.find({"id": {"$eq": id}}).count()
-    if not bal:
-        bal = 0
+    bal = client.ad.coins.find({"user": {"$eq": id}}).count()
     return "{} ADCoins".format(str(bal))
 
 
@@ -43,8 +41,6 @@ def transfer(from_id, to_id, coin_id):
 
     if coin_id.isdigit():
         coin = int(coin_id)
-        if coin <= 0:
-            return "Некорректно введена сумма перевода"
     else:
         return "Некорректно введена сумма перевода"
 
@@ -88,4 +84,6 @@ def get_top():
     top = []
     for i in range(len(name)):
         top.append((i+1, get_name_vk(name[i]["_id"]), name[i]["total"]))
+    if not top:
+        return "К сожалению, еще никто не получил ADCoins. Вы можете стать первым."
     return top
