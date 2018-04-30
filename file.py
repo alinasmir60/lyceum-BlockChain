@@ -10,7 +10,7 @@ def check_hashes(hashes):
     res = []
     for h in hashes:
         error = False
-        if md5(h.encode('utf8')).hexdigest()[:4] == '1008':
+        if md5(h.encode('utf8')).hexdigest()[:3] == '666':
             uid, rest = h.split('-', maxsplit=1)
             if not uid.isdigit() or not pymongo_func.check(rest):
                 error = True
@@ -59,5 +59,5 @@ def top():
     return render_template("top.html", res=result)
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=8080)
+    app.run(host="0.0.0.0", port=8080)
 
