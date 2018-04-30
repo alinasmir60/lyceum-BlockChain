@@ -42,12 +42,14 @@
 </nav>
 <div>
     <h1 class="display-3">Регистрируй</h1>
-
+    <h3>Принимаются монеты, хэш которых в md5 начинается с "666".</h3>
     <form method="POST" action="/">
-         <textarea placeholder="Ваши строки" name="hashes" cols="80" rows="10"></textarea>
+         <textarea placeholder="Ваши строки" name="hashes" cols="100" rows="10"></textarea>
+        <div>
          <button type="submit" class="btn btn-dark">Отправить</button>
+        </div>
          {% if res %}
-            <h1 class="display-3">Обработаны ключи:</h1>
+            <h1>Обработаны ключи:</h1>
             <ul>
                 {% for h, error in res %}
                     <li>{{ h }} &mdash; {% if not error %}ok{% else %}error{% endif %}</li>
