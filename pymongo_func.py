@@ -17,7 +17,7 @@ def add_coin(str, user):
 
 
 def check(str):
-    coin = client.ad.coins.find_one(str)
+    coin = client.ad.coins.find_one({"string": {"$eq": str}})
     if coin is None:
         return True
     return False

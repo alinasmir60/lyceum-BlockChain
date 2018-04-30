@@ -14,7 +14,7 @@ def check_hashes(hashes):
         if len(ha) == 2:
             if md5(h.encode('utf8')).hexdigest()[:3] == '666':
                 uid, rest = ha[1], ha[0]
-                if uid.isdigit() and not pymongo_func.check(rest):
+                if uid.isdigit() and pymongo_func.check(rest):
                     pymongo_func.add_coin(uid, rest)
                     error = False
         res.append((h, error))
