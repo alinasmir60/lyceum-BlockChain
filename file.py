@@ -12,14 +12,11 @@ def check_hashes(hashes):
         error = True
         ha = h.split('-', maxsplit=1)
         if len(ha) == 2:
-            if md5(ha[1].encode('utf8')).hexdigest()[:3] == '666':
+            if md5(h.encode('utf8')).hexdigest()[:3] == '666':
                 uid, rest = ha[0], ha[1]
                 if uid.isdigit() and not pymongo_func.check(rest):
                     pymongo_func.add_coin(uid, rest)
-                else:
                     error = False
-            else:
-                error = False
         res.append((h, error))
     return res
 
